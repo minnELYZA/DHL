@@ -1,11 +1,6 @@
 /Dashboard/nbproject/private/
 /Dashboard/build/
 /Dashboard/dist/
-build/web/carrier.html
-build/web/index.html
-build/web/js/d3.js
-build/web/META-INF/context.xml
-build/web/META-INF/MANIFEST.MF
-build/web/WEB-INF/classes/.netbeans_automatic_build
-build/web/WEB-INF/classes/.netbeans_update_resources
-dist/Dashboard.war
+/nbproject/private/
+/build/
+/dist/
