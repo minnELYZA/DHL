@@ -1,17 +1,39 @@
-d3.csv("data/CDCSheet2.csv", function (error, data) {
-    data.forEach(function (d) {
-        d.CDC;
-        d.Carriers = +d.Carriers;
-        d.MostUtilisedCarrier;
-        d.LessUtilisedCarrier;
-        d.AveDensity = +d.AveDensity;
-        d.Deliveries  = +d.Deliveries;
-        d.AveCO2km  = +d.AveCO2km;
-        d.TrafficRating  = +d.TrafficRating;
-        d.DensityRating  = +d.DensityRating;
-        d.EfficiencyRating  = +d.EfficiencyRating;
-    });
-    
-    
-});
+var tabulate = function (data, columns) {
+    var table = d3.select('body').append('table')
+    var thead = table.append('thead')
+    var tbody = table.append('tbody')
 
+    thead.append('tr')
+            .selectAll('th')
+            .data(columns)
+            .enter()
+            .append('th')
+            .text(function (d) {
+                return d
+            })
+
+    var rows = tbody.selectAll('tr')
+            .data(data)
+            .enter()
+            .append('tr')
+
+    var cells = rows.selectAll('td')
+            .data(function (row) {
+                return columns.map(function (column) {
+                    return {column: column, value: row[column]}
+                })
+            })
+            .enter()
+            .append('td')
+            .text(function (d) {
+                return d.value
+            })
+
+    return table;
+
+}
+
+d3.csv("data/CDCSheet2.csv", function (data) {
+    var columns = ['CDC', 'Carriers', 'MostUtilisedCarrier', 'LessUtilisedCarrier', 'AveDensity', 'Deliveries', 'AveCO2km', 'TrafficRating', 'DensityRating', 'EfficiencyRating']
+    tabulate(data, columns)
+});

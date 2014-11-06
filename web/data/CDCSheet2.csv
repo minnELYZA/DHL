@@ -1,4 +1,4 @@
-CDC,Carriers,MostUtilisedCarrier,LessUtilisedCarrier,AveDensity ,Deliveries,AveCO2km,TrafficRating,DensityRating,EfficiencyRating
+CDC,Carriers,MostUtilisedCarrier,LessUtilisedCarrier,AveDensity,Deliveries,AveCO2km,TrafficRating,DensityRating,EfficiencyRating
 Shanghai CDC,8,Carrier08,Carrier05,162.821441,470,0.32710601,5,4,3
 Beijing CDC,7,Carrier08,Carrier07,129.8815372,384,0.262280876,3,2,5
 Hefei CDC,5,Carrier08,Carrier02,240.2430382,112,0.696085705,1,5,1
