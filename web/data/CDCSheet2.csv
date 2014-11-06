@@ -1,0 +1,7 @@
+CDC Names,Number of Carriers,Most Utilised Carrier,Less Utilised Carrier,Ave Density ,Number of Deliveries,Ave CO2/tonKilometer ,Traffic Rating,Density Rating,Efficiency Rating
+Shanghai CDC,8,Carrier08,Carrier05,162.821441,470,0.32710601,5,4,3
+Beijing CDC,7,Carrier08,Carrier07,129.8815372,384,0.262280876,3,2,5
+Hefei CDC,5,Carrier08,Carrier02,240.2430382,112,0.696085705,1,5,1
+Chengdu CDC,5,Carrier08,Carrier02,151.5398022,162,0.327472934,2,3,3
+Huiyang CDC,5,Carrier09,Carrier02,125.0783045,417,0.357173201,4,1,2
+Shenzhen CDC,4,Carrier08,Carrier04,151.6054541,166,0.291483453,2,3,4
