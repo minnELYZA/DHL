@@ -34,6 +34,15 @@ var tabulate = function (data, columns) {
 }
 
 d3.csv("data/CDCSheet2.csv", function (data) {
+    data.forEach(function (d) {
+        d.AveDensity = Math.round(+d.AveDensity);
+        d.Deliveries = +d.Deliveries;
+        d.AveCO2km = (+d.AveCO2km).toFixed(3);
+        d.TrafficRating = +d.TrafficRating;
+        d.DensityRating = +d.DensityRating;
+        d.EfficiencyRating = +d.EfficiencyRating;
+    });
+
     var columns = ['CDC', 'Carriers', 'MostUtilisedCarrier', 'LessUtilisedCarrier', 'AveDensity', 'Deliveries', 'AveCO2km', 'TrafficRating', 'DensityRating', 'EfficiencyRating']
     tabulate(data, columns)
 });
