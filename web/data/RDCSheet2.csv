@@ -1,4 +1,4 @@
-Names,Num-Deliveries,Most-Utilised-Carrier,Less-Utilised-Carrier,Ave-Density ,Ave-CO2-per-tonKilometer ,Traffic-Rating,Density-Rating,Efficiency-Rating
+Names,Deliveries,MostUtilisedCarrier,LessUtilisedCarrier,AveDensity ,AveCO2km,TrafficRating,DensityRating,EfficiencyRating
 Shanghai RDC,42,Carrier08,Carrier04,204.7836453,0.273689521,2,5,5
 Urumqi RDC,13,Carrier02,Carrier08,121.1846103,0.295536116,1,1,5
 Lanzhou RDC,31,Carrier03,Carrier08,131.9680442,0.341989465,2,2,4
