@@ -22,7 +22,7 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
   
   var graticule = d3.geo.graticule();
   
-  var svg = d3.select("svg");
+  var svg = d3.select("svg").select("g");
   
   svg.append("path")
     .datum(graticule)

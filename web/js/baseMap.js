@@ -18,12 +18,26 @@ var path = d3.geo.path()
     .projection(projection)
     .pointRadius(2);
     
+var zoom = d3.behavior.zoom()
+    .translate([0, 0])
+    .scale(1)
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
+    
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
+var features = svg.append("g");
+
+svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width)
+    .attr("height", height)
+    .call(zoom);
+
 d3.json("/Dashboard/china.json", function(china) {
-  svg.selectAll(".subunit")
+  features.selectAll(".subunit")
     .data(topojson.feature(china, china.objects.subunits).features)
     .enter().append("path")
     .attr("class", function(d) { return "subunit " + d.id; })
@@ -44,7 +58,7 @@ d3.json("/Dashboard/china.json", function(china) {
 //    .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
 //    .text(function(d) { return d.properties.name; });
     
-  svg.selectAll(".subunit-label")
+  features.selectAll(".subunit-label")
     .data(topojson.feature(china, china.objects.subunits).features)
     .enter().append("text")
     .attr("class", function(d) {return "subunit-label " + d.id;})
@@ -53,3 +67,11 @@ d3.json("/Dashboard/china.json", function(china) {
     .text(function(d) {return d.properties.name;});
     
 });
+
+function zoomed() {
+  features.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  features.select(".subunit").style("stroke-width", 1.5 / d3.event.scale + "px");
+  features.select(".subunit-label").style("stroke-width", 1.5 / d3.event.scale + "px");
+}
+
+d3.select(self.frameElement).style("height", height + "px");
