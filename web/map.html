@@ -29,11 +29,39 @@ and open the template in the editor.
         text-anchor: middle;
       }
       
+      
+      
+      .graticule {
+        fill: none;
+        stroke: #777;
+        stroke-width: .5px;
+        stroke-opacity: .5;
+      }
+      .points circle {
+        fill: #fff;
+        stroke-width: 2px;
+      }
+      .cdc circle {
+        stroke: green;
+      }
+      .rdc circle {
+        stroke: red;
+      }
+      .points text {
+        font: 11px sans-serif;
+        text-anchor: middle;
+        text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+      }
+      .cdc text {
+        font: 13px sans-serif;
+        font-weight: bold;
+      }
     </style>
     <script src="js/d3.js"></script>
     <script src="js/topojson.js"></script>
   </head>
   <body>
     <script type="text/javascript" src="js/baseMap.js"></script>
+    <script type="text/javascript" src="js/routes.js"></script>
   </body>
 </html>

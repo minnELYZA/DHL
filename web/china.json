@@ -42,6 +42,7 @@
 				{"type":"Point","properties":{"name":"Shenyeng"},"coordinates":[8148,6887]},
 				{"type":"Point","properties":{"name":"Nanchang"},"coordinates":[6910,3415]},
 				{"type":"Point","properties":{"name":"Qingdao"},"coordinates":[7638,5375]},
+				{"type":"Point","properties":{"name":"Jinan"},"coordinates":[7093,5530]},
 				{"type":"Point","properties":{"name":"Fuzhou"},"coordinates":[7470,2727]},
 				{"type":"Point","properties":{"name":"Shijianzhuang"},"coordinates":[6682,5894]},
 				{"type":"Point","properties":{"name":"Xining"},"coordinates":[4604,5515]},

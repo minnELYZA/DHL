@@ -29,20 +29,20 @@ d3.json("/Dashboard/china.json", function(china) {
     .attr("class", function(d) { return "subunit " + d.id; })
     .attr("d", path);
   
-  svg.append("path")
-    .datum(topojson.feature(china, china.objects.places))
-    .attr("d", path)
-    .attr("class", "place");
+//  svg.append("path")
+//    .datum(topojson.feature(china, china.objects.places))
+//    .attr("d", path)
+//    .attr("class", "place");
 
-  svg.selectAll(".place-label")
-    .data(topojson.feature(china, china.objects.places).features)
-    .enter().append("text")
-    .attr("class", "place-label")
-    .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
-    .attr("x", function(d) { return d.geometry.coordinates[0] > -1 ? 6 : -6; })
-    .attr("dy", ".35em")
-    .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
-    .text(function(d) { return d.properties.name; });
+//  svg.selectAll(".place-label")
+//    .data(topojson.feature(china, china.objects.places).features)
+//    .enter().append("text")
+//    .attr("class", "place-label")
+//    .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+//    .attr("x", function(d) { return d.geometry.coordinates[0] > -1 ? 6 : -6; })
+//    .attr("dy", ".35em")
+//    .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
+//    .text(function(d) { return d.properties.name; });
     
   svg.selectAll(".subunit-label")
     .data(topojson.feature(china, china.objects.subunits).features)
