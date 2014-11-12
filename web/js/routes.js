@@ -10,6 +10,9 @@ var svg = d3.select("svg").select("g");
 
 var cdc = {};
 var rdc = {};
+var test;
+var circles;
+var lines;
 
 d3.csv("./data/Addresses.csv", function(error, addresses) {
   addresses.forEach(function (d){
@@ -38,6 +41,7 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     .attr("transform", function(d) { return "translate(" + projection(d.value) + ")"; });
 
   ptCdc.append("circle")
+    .attr("name", function(d) {return d.key;})
     .attr("r", 10);
 
   ptCdc.append("text")
@@ -53,6 +57,7 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     .attr("transform", function(d) { return "translate(" + projection(d.value) + ")"; });
 
   ptRdc.append("circle")
+    .attr("name", function(d) {return d.key;})
     .attr("r", 4.5);
 
   ptRdc.append("text")
@@ -60,35 +65,52 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     .attr("dy", ".71em")
     .text(function(d) { return d.key; });
     
-    
-    
+
+  
+  
+  // select circles
+  circles = svg.selectAll("circle")
+          .on("click", function(d){
+            console.log(d);
+          })
+          .on("mouseover", function(d){
+            console.log(d.key);
+            lines[0].forEach(function(e){
+              if (e.hasAttribute("from") && e.getAttribute("from") === d.key) {
+                console.log("i am " + e.getAttribute("from") + " " + e.getAttribute("to"));
+                e.style.stroke = "cyan";
+              }
+            });
+          });
     
   d3.csv("./data/RouteSheet3.csv", function(error, route) {
-  var arc = {};
-  for (r in route) {
-    var name = route[r].RouteName;
-    var name1 = name.substr(0,name.lastIndexOf(",")).trim();
-    var name2 = name.substr(name.lastIndexOf(",") + 1).trim();
-    // look to remove arc later
-    arc[name1] = cdc[name1];
-    arc[name2] = rdc[name2];
-    
-    var line = {
-      type: "LineString",
-      coordinates: [
-        cdc[name1],
-        rdc[name2]
-      ]
-    };
-    
-    svg.append("path")
-    .datum(line)
-    .attr("class", "route")
-    .attr("d", path);
-    
-    arc = {};
-  }
-  
-});
+    for (r in route) {
+      var name = route[r].RouteName;
+      var name1 = name.substr(0,name.lastIndexOf(",")).trim();
+      var name2 = name.substr(name.lastIndexOf(",") + 1).trim();
+
+      var line = {
+        route: name,
+        type: "LineString",
+        coordinates: [
+          cdc[name1],
+          rdc[name2]
+        ]
+      };
+
+      svg.append("path")
+      .datum(line)
+      .attr("from", name1)
+      .attr("to", name2)
+      .attr("class", "route " + name1)
+      .attr("d", path);
+    }
+
+    // select circles
+    lines = svg.selectAll("path").on("click", function(d){
+      console.log(d);
+      test=d;
+    });
+  });
 });
 
