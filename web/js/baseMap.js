@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-var width = 820,
-    height = 720;
+var width = 650,
+    height = 600;
 
 var projection = d3.geo.albers()
     .center([0, 34.6])
@@ -24,7 +24,7 @@ var zoom = d3.behavior.zoom()
     .scaleExtent([1, 8])
     .on("zoom", zoomed);
     
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
