@@ -72,10 +72,16 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
   circles = svg.selectAll("circle")
           .on("click", function(d){
             console.log(d);
+            circles[0].forEach(function(e){
+              e.style.fill = null;
+            });
+            d3.select(this).style("fill", "yellow");
           })
           .on("mouseover", function(d){
+            this.style.cursor = "pointer";
             console.log(d.key);
             lines[0].forEach(function(e){
+              test=e;
               if (e.hasAttribute("from") && e.getAttribute("from") === d.key) {
                 e.style.stroke = "lightcoral";
               } else if (e.hasAttribute("from")) {
