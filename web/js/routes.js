@@ -77,8 +77,16 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
             console.log(d.key);
             lines[0].forEach(function(e){
               if (e.hasAttribute("from") && e.getAttribute("from") === d.key) {
-                console.log("i am " + e.getAttribute("from") + " " + e.getAttribute("to"));
-                e.style.stroke = "cyan";
+                e.style.stroke = "lightcoral";
+              } else if (e.hasAttribute("from")) {
+                e.style.stroke = "none";
+              }
+            });
+          })
+          .on("mouseout", function(d){
+            lines[0].forEach(function(e){
+              if (e.hasAttribute("from")) {
+                e.style.stroke = "grey";
               }
             });
           });
@@ -109,7 +117,6 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     // select circles
     lines = svg.selectAll("path").on("click", function(d){
       console.log(d);
-      test=d;
     });
   });
 });

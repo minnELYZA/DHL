@@ -9,9 +9,9 @@ var width = 650,
 
 var projection = d3.geo.albers()
     .center([0, 34.6])
-    .rotate([256.4, 0])
+    .rotate([253.4, 0])
     .parallels([50, 60])
-    .scale(1000)
+    .scale(900)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
@@ -24,7 +24,7 @@ var zoom = d3.behavior.zoom()
     .scaleExtent([1, 8])
     .on("zoom", zoomed);
     
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height);
 

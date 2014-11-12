@@ -50,6 +50,7 @@ text {
     stroke: grey;
     stroke-width: 1px;
 }
+<<<<<<< HEAD
 
 .Beijing:hover {
     stroke: red;
@@ -65,4 +66,10 @@ text {
 }
 .Shanghai:hover {
     stroke: yellow;
+=======
+.route:hover {
+    fill: none;
+    stroke: lightcoral;
+    stroke-width: 3px;
+>>>>>>> origin/master
 }
