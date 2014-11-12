@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-var width = 820,
-    height = 720;
+var width = 650,
+    height = 600;
 
 var projection = d3.geo.albers()
     .center([0, 34.6])

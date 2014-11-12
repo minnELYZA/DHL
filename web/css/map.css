@@ -50,3 +50,19 @@ text {
     stroke: grey;
     stroke-width: 1px;
 }
+
+.Beijing:hover {
+    stroke: red;
+}
+.Chengdu:hover {
+    stroke: blue;
+}
+.Hefei:hover {
+    stroke: green;
+}
+.Huiyang:hover {
+    stroke: orange;
+}
+.Shanghai:hover {
+    stroke: yellow;
+}
