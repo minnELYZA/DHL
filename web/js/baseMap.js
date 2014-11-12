@@ -30,11 +30,11 @@ var svg = d3.select("body").append("svg")
 
 var features = svg.append("g");
 
-svg.append("rect")
+/* svg.append("rect")
     .attr("class", "overlay")
     .attr("width", width)
     .attr("height", height)
-    .call(zoom);
+    .call(zoom); */
 
 d3.json("/Dashboard/china.json", function(china) {
   features.selectAll(".subunit")
