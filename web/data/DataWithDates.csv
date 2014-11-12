@@ -1,4 +1,4 @@
-Shipment#,IndexDate,Month,Year,Date(Period),CarrierRef,EnglishOrigin,EnglishDestination,Route,GCD,CO2(kg),CO2Metric,Density,CDCTrafficRating,CDCDensityRating,CDCEfficiencyRating,RDCTrafficRating,RDCDensityRating,RDCEfficiencyRating,RouteTrafficRating,RouteDensityRating,RouteEfficiencyRating
+Shipment#,IndexDate,Month,Year,Date(Period),CarrierRef,EnglishOrigin,EnglishDestination,Route,GCD,CO2,CO2Metric,Density,CDCTrafficRating,CDCDensityRating,CDCEfficiencyRating,RDCTrafficRating,RDCDensityRating,RDCEfficiencyRating,RouteTrafficRating,RouteDensityRating,RouteEfficiencyRating
 1,04-01-2013,4,2013,Apr-13,Carrier12,Beijing CDC,Chongqing RDC,"Beijing CDC , Chongqing RDC",560.2,354.6191463,0.290403888,131.8055388,3,3,5,4,4,5,3,1,4
 2,04-01-2013,4,2013,Apr-13,Carrier10,Shanghai CDC,Wuhan RDC,"Shanghai CDC , Wuhan RDC",691.8,98.76551341,0.185668386,215.3865546,5,4,3,2,2,5,2,2,4
 3,04-02-2013,4,2013,Apr-13,Carrier03,Chengdu CDC,Xian RDC,"Chengdu CDC , Xian RDC",611.4,335.7789334,0.291264567,128.6193724,2,3,3,2,2,5,2,1,4

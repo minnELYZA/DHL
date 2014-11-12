@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>DHL Dashboard</title>
+
+        <link rel="stylesheet" href="css/dc.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/map.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/crossfilter.js" ></script>
+        <script type="text/javascript" src="js/d3.js"></script>
+        <script type="text/javascript" src="js/dc.js"></script>
+        <script type="text/javascript" src="js/topojson.js"></script>
+        <script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
+
+        <style>
+            h4 span {
+                font-size:14px;
+                font-weight:normal;
+            }
+            body {
+                padding-top: 50px;
+                /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top nav-condensed" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DHL Dashboard</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="col-md-6">
+                <script type="text/javascript" src="js/baseMap.js"></script>
+                <script type="text/javascript" src="js/routes.js"></script>
+            </div>
+
+            <div class="col-md-6">
+                <div id='dc-RDC-chart'>
+                    <h4>Average Density
+                        <button class="btn btn-primary" onclick="javascript:dc.filterAll();
+                                dc.renderAll();">Reset All</button>
+                    </h4>
+                </div>
+                <div id='dc-DE-chart'>
+                    <h4>Density Rating Count</h4>
+                </div>
+                <div id='dc-CO2-chart'>
+                    <h4>Density Rating Count</h4>
+                </div>
+
+            </div>
+        </div>
+
+        <div class='row col-md-10 col-md-offset-1' style="margin-left: 30px;padding-left: 0px;">
+            <table class='table table-hover table-bordered table-striped table-condensed' id='dc-table-graph' style="overflow:auto;width: 1288px;">
+                <thead>
+                    <tr class='header'>
+                        <th style="width: 157px;">Density</th>
+                        <th style="width: 157px;">GCD</th>
+                        <th style="width: 157px;">CO2</th>
+                        <th style="width: 157px;">Date</th>
+                        <th style="width: 157px;">Origin</th>
+                        <th style="width: 157px;">Destination</th>
+                        <th style="width: 157px;">CO2 Metric</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <script type="text/javascript" src="data.js"></script>
+    </body>
+</html>
