@@ -7,19 +7,18 @@ var CO2Chart = dc.barChart("#dc-CO2-chart");
 
 function getName(x)
 {
+    document.getElementById("charts").className = "col-md-6";
     d3.csv("data/DataWithDates.csv", function (data) {
         data = data.filter(function (row) {
-            return row['EnglishOrigin'] == x  || row['EnglishDestination'] == x
+            return row['EnglishOrigin'] === x  || row['EnglishDestination'] === x;
         });
         var dateFormat = d3.time.format("%m-%d-%Y").parse;
         data.forEach(function (d) {
             d.IndexDate = dateFormat(d.IndexDate);
-
             d.Density = Math.round(+d.Density);
             d.CO2 = Math.round(+d.CO2);
             d.GCD = Math.round(+d.GCD);
         });
-        console.log(data[0].IndexDate);
         // Run the data through crossfilter and load our 'facts'
         var facts = crossfilter(data);
         var all = facts.groupAll();
@@ -62,7 +61,7 @@ function getName(x)
 
         RDCChart.width(628)
                 .height(150)
-                .margins({top: 10, right: 10, bottom: 20, left: 20})
+                .margins({top: 10, right: 10, bottom: 20, left: 30})
                 .dimension(deliveryByMonth)
                 .group(deliveryByMonthGroup)
                 .transitionDuration(500)
@@ -77,7 +76,7 @@ function getName(x)
 
         DEChart.width(628)
                 .height(150)
-                .margins({top: 10, right: 10, bottom: 20, left: 20})
+                .margins({top: 10, right: 10, bottom: 20, left: 30})
                 .dimension(densityValue)
                 .group(densityValueGroupCount)
                 .transitionDuration(500)
@@ -91,14 +90,18 @@ function getName(x)
 
         CO2Chart.width(628)
                 .height(150)
-                .margins({top: 10, right: 10, bottom: 20, left: 20})
+                .margins({top: 10, right: 10, bottom: 20, left: 30})
                 .dimension(co2Value)
                 .group(co2ValueGroupCount)
                 .transitionDuration(500)
                 .centerBar(true)
                 .gap(65)
-                .x(d3.scale.linear().domain([0, 5000]))
-                .y(d3.scale.linear().domain([15, 20]))
+//                .x(d3.scale.linear().domain([0, 5000]))
+//                .y(d3.scale.linear().domain([15, 20]))
+                .x(d3.scale.linear().domain(d3.extent(data, function (d) {
+                    return d.CO2;
+                })))
+                .elasticY(true)
                 .elasticY(true)
                 .xAxis().tickFormat();
 

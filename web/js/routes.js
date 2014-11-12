@@ -13,6 +13,7 @@ var rdc = {};
 var test;
 var circles;
 var lines;
+var circleSelected = false;
 
 d3.csv("./data/Addresses.csv", function(error, addresses) {
   addresses.forEach(function (d){
@@ -64,18 +65,23 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     .attr("y", 10)
     .attr("dy", ".71em")
     .text(function(d) { return d.key; });
-    
-
-  
   
   // select circles
   circles = svg.selectAll("circle")
           .on("click", function(d){
+            circleSelected = true;
             console.log(d);
             circles[0].forEach(function(e){
               e.style.fill = null;
             });
             d3.select(this).style("fill", "yellow");
+            lines[0].forEach(function(e){
+              if (e.hasAttribute("from") && e.getAttribute("from") === d.key) {
+                e.style.stroke = "lightcoral";
+              } else if (e.hasAttribute("from")) {
+                e.style.stroke = "none";
+              }
+            });
             getName(d.key);
           })
           .on("mouseover", function(d){
@@ -90,11 +96,13 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
             });
           })
           .on("mouseout", function(d){
-            lines[0].forEach(function(e){
-              if (e.hasAttribute("from")) {
-                e.style.stroke = "grey";
-              }
-            });
+            if (!circleSelected) {
+              lines[0].forEach(function(e){
+                if (e.hasAttribute("from")) {
+                  e.style.stroke = null;
+                }
+              });
+            }
           });
     
   d3.csv("./data/RouteSheet3.csv", function(error, route) {
@@ -122,7 +130,25 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
 
     // select lines
     lines = svg.selectAll("path").on("click", function(d){
+      circleSelected = false;
       console.log(d);
+      circles[0].forEach(function(e){
+        e.style.fill = null;
+      });
+      lines[0].forEach(function(e){
+        if (e.hasAttribute("geometry")) {
+          e.style.stroke = null;
+        } else {
+          if (e.hasAttribute("from") && d.route === e.getAttribute("from") + " , " + e.getAttribute("to")) {
+            test = e;
+            e.style.stroke = "lightcoral";
+          } else if (e.hasAttribute("from")) {
+            e.style.stroke = null;
+          } else {
+            e.style.stroke = null;
+          }
+        }
+      });
       //return d.route to jiawei
     });
   });
