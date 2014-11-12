@@ -54,7 +54,7 @@
                     return d.AveDensity;
                 });
 
-                RDCChart.width(480)
+                RDCChart.width(628)
                         .height(150)
                         .margins({top: 10, right: 10, bottom: 20, left: 40})
                         .dimension(densityValue)
@@ -69,7 +69,7 @@
                         .elasticY(true)
                         .xAxis().tickFormat();
 
-                DEChart.width(480)
+                DEChart.width(628)
                         .height(150)
                         .margins({top: 10, right: 10, bottom: 20, left: 40})
                         .dimension(deValue)
