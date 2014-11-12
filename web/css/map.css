@@ -50,3 +50,8 @@ text {
     stroke: grey;
     stroke-width: 1px;
 }
+.route:hover {
+    fill: none;
+    stroke: lightcoral;
+    stroke-width: 3px;
+}
