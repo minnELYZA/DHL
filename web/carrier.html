@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+
+        <title>dc.js Experiment</title>
+
+        <script type="text/javascript" src="js/d3.js"></script>
+        <script type="text/javascript" src="js/crossfilter.js" ></script>
+        <script type="text/javascript" src="js/dc.js"></script>
+        <script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="css/dc.css">
+
+
+
+        <style>
+            h4 span {
+                font-size:14px;
+                font-weight:normal;
+            }
+            h2 {
+                float: right;
+            }
+            h2 span {
+                font-size:14px;
+                font-weight:normal;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class='container' style='font: 12px sans-serif;'>
+            <div class="row">
+                <div class="dc-data-count" style="float: left;">
+                    <h2>RDC data
+                        <span>
+                            <span class="filter-count"></span>
+                            selected out of 
+                            <span class="total-count"></span>
+                            records
+                            <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+                        </span>
+                    </h2>
+                </div>
+                <script>
+                    function checkStatus()
+                    {
+                        for (count = 0; count < 12; count++)
+                        {
+                            if (carrierForm.Carrier[count].checked) {
+                                var dataTable = dc.dataTable("#dc-table-graph");
+                                var c1Chart = dc.barChart("#dc-c1-chart");
+                                // format our data
+                                var c = count;
+                                d3.csv("data/DataWithDates.csv", function (data) {
+                                    data = data.filter(function (row) {
+                                        console.log(count);
+                                        if(c==0) return row['CarrierRef'] === 'Carrier01';
+                                        if(c==1) return row['CarrierRef'] === 'Carrier02';
+                                        if(c==2) return row['CarrierRef'] === 'Carrier03';
+                                        if(c==3) return row['CarrierRef'] === 'Carrier04';
+                                        if(c==4) return row['CarrierRef'] === 'Carrier05';
+                                        if(c==5) return row['CarrierRef'] === 'Carrier06';
+                                        if(c==6) return row['CarrierRef'] === 'Carrier07';
+                                        if(c==7) return row['CarrierRef'] === 'Carrier08';
+                                        if(c==8) return row['CarrierRef'] === 'Carrier09';
+                                        if(c==9) return row['CarrierRef'] === 'Carrier10';
+                                        if(c==10) return row['CarrierRef'] === 'Carrier11';
+                                        if(c==11) return row['CarrierRef'] === 'Carrier12';
+                                    });
+                                    var dateFormat = d3.time.format("%m-%d-%Y").parse;
+                                    data.forEach(function (d) {
+                                        d.IndexDate = dateFormat(d.IndexDate);
+                                        d.Density = Math.round(+d.Density);
+                                        d.CO2 = Math.round(+d.CO2);
+                                        d.GCD = Math.round(+d.GCD);
+                                        d.CO2Metric = +d.CO2Metric;
+                                        console.log(d.IndexDate);
+                                    });
+                                    // Run the data through crossfilter and load our 'facts'
+                                    var facts = crossfilter(data);
+                                    var all = facts.groupAll();
+                                    // timechart
+                                    var deliveryByMonth = facts.dimension(function (d) {
+                                        return d.IndexDate;
+                                    });
+                                    var deliveryByMonthGroup = deliveryByMonth.group()
+                                            .reduceCount(function (d) {
+                                                return d.IndexDate;
+                                            });
+                                    // Create density value
+                                    var densityValue = facts.dimension(function (d) {
+                                        return d.Density;
+                                    });
+                                    var densityValueGroupCount = densityValue.group()
+                                            .reduceCount(function (d) {
+                                                return d.Density;
+                                            });
+                                    var densityValueGroupSum = densityValue.group()
+                                            .reduceSum(function (d) {
+                                                return d.Density;
+                                            });
+                                    var co2Value = facts.dimension(function (d) {
+                                        return d.CO2;
+                                    });
+                                    var co2ValueGroupCount = co2Value.group()
+                                            .reduceCount(function (d) {
+                                                return d.CO2;
+                                            });
+                                    var co2ValueGroupSum = co2Value.group()
+                                            .reduceSum(function (d) {
+                                                return d.CO2;
+                                            });
+                                    var timeDimension = facts.dimension(function (d) {
+                                        return d.Density;
+                                    });
+                                    c1Chart.width(550)
+                                            .height(150)
+                                            .margins({top: 10, right: 10, bottom: 20, left: 40})
+                                            .dimension(deliveryByMonth)
+                                            .group(deliveryByMonthGroup)
+                                            .centerBar(true)
+                                            .gap(65)
+                                            .x(d3.time.scale().domain(d3.extent(data, function (d) {
+                                                return d.IndexDate;
+                                            })));
+                                    dataTable.width(960).height(800)
+                                            .dimension(timeDimension)
+                                            .group(function (d) {
+                                                return "<b><i>RDC Table</i></b>";
+                                            })
+                                            .size(1000)
+                                            .columns([
+                                                function (d) {
+                                                    return d.Density;
+                                                },
+                                                function (d) {
+                                                    return d.GCD;
+                                                },
+                                                function (d) {
+                                                    return d.CO2;
+                                                },
+                                                function (d) {
+                                                    return d.IndexDate.toString().substring(4, 15);
+                                                },
+                                                function (d) {
+                                                    return d.EnglishOrigin;
+                                                },
+                                                function (d) {
+                                                    return d.EnglishDestination;
+                                                },
+                                                function (d) {
+                                                    return d.CO2Metric;
+                                                },
+                                                function (d) {
+                                                    return d.CarrierRef;
+                                                }
+                                            ])
+                                            .sortBy(function (d) {
+                                                return d.Density;
+                                            })
+                                            .order(d3.ascending);
+                                    dc.renderAll();
+                                });
+                            }
+                        }
+                    }
+                </script>
+                <form name="carrierForm">
+                    <input type="radio" name="Carrier" id="Carrier_1" value="1">Carrier1
+                    <input type="radio" name="Carrier" value="2">Carrier2
+                    <input type="radio" name="Carrier" value="3">Carrier3
+                    <input type="radio" name="Carrier" value="4">Carrier4
+                    <input type="radio" name="Carrier" value="5">Carrier5
+                    <input type="radio" name="Carrier" value="6">Carrier6
+                    <br>
+                    <input type="radio" name="Carrier" value="7">Carrier7
+                    <input type="radio" name="Carrier" value="8">Carrier8
+                    <input type="radio" name="Carrier" value="9">Carrier9
+                    <input type="radio" name="Carrier" value="10">Carrier10
+                    <input type="radio" name="Carrier" value="11">Carrier11
+                    <input type="radio" name="Carrier" value="12">Carrier12
+                    <input type="button" value="Confirm" onclick="checkStatus()">
+                </form>
+            </div>
+            <div class='row'>
+                <div class='span6' id='dc-c1-chart'>
+                    <h4>Carrier</h4>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='span12'>
+                    <table class='table table-hover' id='dc-table-graph'>
+                        <thead>
+                            <tr class='header'>
+                                <th>Density</th>
+                                <th>GCD</th>
+                                <th>CO2(kg)</th>
+                                <th>IndexDate</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>CO2 Metric</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+
+
+//            d3.csv("data/DataWithDates.csv", function (data) {
+//                data = data.filter(function (row) {
+//                    return row['CarrierRef'] == 'Carrier02';
+//                });
+//                var dateFormat = d3.time.format("%m-%d-%Y").parse;
+//                data.forEach(function (d) {
+//                    d.IndexDate = dateFormat(d.IndexDate);
+//                    d.Density = Math.round(+d.Density);
+//                    d.CO2 = Math.round(+d.CO2);
+//                    d.GCD = Math.round(+d.GCD);
+//                    d.CO2Metric = +d.CO2Metric;
+//                });
+//                // Run the data through crossfilter and load our 'facts'
+//                var facts = crossfilter(data);
+//                var all = facts.groupAll();
+//
+//                // timechart
+//                var deliveryByMonth = facts.dimension(function (d) {
+//                    return d.IndexDate;
+//                });
+//                var deliveryByMonthGroup = deliveryByMonth.group()
+//                        .reduceCount(function (d) {
+//                            return d.IndexDate;
+//                        });
+//
+//                // Create density value
+//                var densityValue = facts.dimension(function (d) {
+//                    return d.Density;
+//                });
+//                var densityValueGroupCount = densityValue.group()
+//                        .reduceCount(function (d) {
+//                            return d.Density;
+//                        });
+//                var densityValueGroupSum = densityValue.group()
+//                        .reduceSum(function (d) {
+//                            return d.Density;
+//                        });
+//
+//                var co2Value = facts.dimension(function (d) {
+//                    return d.CO2;
+//                });
+//                var co2ValueGroupCount = co2Value.group()
+//                        .reduceCount(function (d) {
+//                            return d.CO2;
+//                        });
+//                var co2ValueGroupSum = co2Value.group()
+//                        .reduceSum(function (d) {
+//                            return d.CO2;
+//                        });
+//
+//                var timeDimension = facts.dimension(function (d) {
+//                    return d.Density;
+//                });
+//
+//                c2Chart.width(550)
+//                        .height(150)
+//                        .margins({top: 10, right: 10, bottom: 20, left: 40})
+//                        .dimension(deliveryByMonth)
+//                        .group(deliveryByMonthGroup)
+//                        .centerBar(true)
+//                        .gap(65)
+//                        .x(d3.time.scale().domain(d3.extent(data, function (d) {
+//                            return d.IndexDate;
+//                        })))
+//
+//                dataTable2.width(960).height(800)
+//                        .dimension(timeDimension)
+//                        .group(function (d) {
+//                            return "<b><i>RDC Table</i></b>";
+//                        })
+//                        .size(1000)
+//                        .columns([
+//                            function (d) {
+//                                return d.Density;
+//                            },
+//                            function (d) {
+//                                return d.GCD;
+//                            },
+//                            function (d) {
+//                                return d.CO2;
+//                            },
+//                            function (d) {
+//                                return d.IndexDate.toString().substring(4, 15);
+//                            },
+//                            function (d) {
+//                                return d.EnglishOrigin;
+//                            },
+//                            function (d) {
+//                                return d.EnglishDestination;
+//                            },
+//                            function (d) {
+//                                return d.CO2Metric;
+//                            },
+//                            function (d) {
+//                                return d.CarrierRef;
+//                            }
+//                        ])
+//                        .sortBy(function (d) {
+//                            return d.Density;
+//                        })
+//                        .order(d3.ascending);
+//                dc.renderAll();
+//            });
+        </script>
+    </body>
+</html>
