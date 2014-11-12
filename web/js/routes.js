@@ -76,7 +76,7 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
               e.style.fill = null;
             });
             d3.select(this).style("fill", "yellow");
-            //return d.key to jiawei
+            getName(d.key);
           })
           .on("mouseover", function(d){
             this.style.cursor = "pointer";
