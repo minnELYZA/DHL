@@ -1,3 +1,5 @@
+'use strict';
+
 // Create the dc.js chart objects & link to div
 var dataTable = dc.dataTable("#dc-table-graph");
 var RDCChart = dc.barChart("#dc-RDC-chart");
