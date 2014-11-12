@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+      <meta charset='utf-8'>
+
+      <title>dc.js Experiment</title>
+
+      <script src='js/d3.js' type='text/javascript'></script>
+      <script src='js/crossfilter.js' type='text/javascript'></script>
+      <script src='js/dc.js' type='text/javascript'></script>
+      <script type="text/javascript" src="js/jquery/jquery-1.8.2.js"></script>
+      <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      
+      <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+      <link href='dc.css' rel='stylesheet' type='text/css'>
+      <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="css/dc.css" type="text/css"/>
+
+  
+      <style>
+        h4 span {
+          font-size:14px;
+          font-weight:normal;
+          }
+        h2 {
+          float: right;
+        }
+        h2 span {
+          font-size:14px;
+          font-weight:normal;
+          }
+      </style>
+    </head>
+
+    <body>
+
+    <div class='container' style='font: 12px sans-serif;'>
+        <div class="row">
+            <div class="dc-data-count" style="float: left;">
+                <h2>RDC data
+                  <span>
+                    <span class="filter-count"></span>
+                     selected out of 
+                    <span class="total-count"></span>
+                     records
+                    <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+                  </span>
+                </h2>
+            </div>  
+        </div>
+        <div class='row'>
+            <div class='span6' id='dc-RDC-chart'>
+                <h4>AveDensity</h4>
+            </div>
+            <div class='span6' id='dc-DE-chart'>
+                <h4>Density Rating Count</h4>
+            </div>    
+        </div>
+        
+      <div class='row'>
+        <div class='span12'>
+          <table class='table table-hover' id='dc-table-graph'>
+            <thead>
+              <tr class='header'>
+                <th>AveDensity</th>
+                <th>Deliveries</th>
+                <th>AveCO2km</th>
+                <th>TrafficRating</th>
+                <th>DensityRating</th>
+                <th>EfficiencyRating</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+
+        <script>
+
+        // load data from a csv file
+        d3.csv("data/RDCSheet2.csv", function (data) {
+
+          data.forEach(function(d) { 
+            d.AveDensity = Math.round(+d.AveDensity);
+            d.Deliveries = +d.Deliveries;
+            d.AveCO2km = (+d.AveCO2km).toFixed(3);
+            d.TrafficRating = +d.TrafficRating;
+            d.DensityRating = +d.DensityRating;
+            d.EfficiencyRating = +d.EfficiencyRating;
+          });
+
+          // Create the dc.js chart objects & link to div
+          var dataTable = dc.dataTable("#dc-table-graph");
+          var RDCChart = dc.barChart("#dc-RDC-chart");
+          var DEChart = dc.barChart("#dc-DE-chart");
+          
+          // Run the data through crossfilter and load our 'facts'
+          var facts = crossfilter(data);
+          var all = facts.groupAll();
+          
+          // Create avedensity value
+          var densityValue = facts.dimension(function (d) {
+              return d.AveDensity;
+          });
+          var densityValueGroupCount = densityValue.group()
+                  .reduceCount(function (d) { return d.AveDensity; });
+          var densityValueGroupSum = densityValue.group()
+                  .reduceSum(function(d) { return d.AveDensity; });
+          
+          // for traffic rating
+          var trValue = facts.dimension(function (d) {
+              return d.TrafficRating;
+          });
+          var trValueGroup = trValue.group();
+          
+          // Density rating
+          var deValue = facts.dimension(function (d) {
+              return d.DensityRating;
+          });
+          var deValueGroup = deValue.group();
+          
+          // Efficiency rating
+          var eValue = facts.dimension(function (d) {
+              return d.EfficiencyRating;
+          });
+          var eValueGroup = eValue.group();
+          
+          // Create dataTable dimension
+          var timeDimension = facts.dimension(function (d) {
+              return d.AveDensity;
+          });
+
+          RDCChart.width(480)
+            .height(150)
+            .margins({top: 10, right: 10, bottom: 20, left: 40})
+            .dimension(densityValue)
+            .group(densityValueGroupCount)
+            .transitionDuration(500)
+            .centerBar(true)    
+            .gap(65)
+            .filter([3, 5])
+            .x(d3.scale.linear().domain(d3.extent(data, function (d) { return d.AveDensity; })))
+            .elasticY(true)
+            .xAxis().tickFormat();
+            
+          DEChart.width(480)
+            .height(150)
+            .margins({top: 10, right: 10, bottom: 20, left: 40})
+            .dimension(deValue)
+            .group(deValueGroup)
+            .transitionDuration(500)
+            .centerBar(true)	
+            .gap(65)  
+            .x(d3.scale.linear().domain([0,5]))
+            .elasticY(true)
+            .xAxis().tickFormat();
+    
+          // Table of earthquake data
+          dataTable.width(960).height(800)
+            .dimension(timeDimension)
+            .group(function(d) { return "CDC Table";
+             })
+            .size(10)
+            .columns([
+              function(d) { return d.AveDensity; },
+              function(d) { return d.Deliveries; },
+              function(d) { return d.AveCO2km; },
+              function(d) { return d.TrafficRating; },
+              function(d) { return d.DensityRating; },
+              function(d) { return d.EfficiencyRating; }
+            ])
+            .sortBy(function(d){ return d.AveDensity; })
+            .order(d3.ascending);
+
+          // Render the Charts
+           
+        
+          dc.renderAll();
+          
+          
+        }); 
+        
+        </script>
+    </body>
+</html>
