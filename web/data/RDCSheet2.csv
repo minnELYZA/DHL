@@ -1,4 +1,4 @@
-Names,Deliveries,MostUtilisedCarrier,LessUtilisedCarrier,AveDensity ,AveCO2km,TrafficRating,DensityRating,EfficiencyRating
+Names,Deliveries,MostUtilisedCarrier,LessUtilisedCarrier,AveDensity,AveCO2km,TrafficRating,DensityRating,EfficiencyRating
 Shanghai RDC,42,Carrier08,Carrier04,204.7836453,0.273689521,2,5,5
 Urumqi RDC,13,Carrier02,Carrier08,121.1846103,0.295536116,1,1,5
 Lanzhou RDC,31,Carrier03,Carrier08,131.9680442,0.341989465,2,2,4
@@ -33,4 +33,3 @@ Changchun RDC,34,Carrier08,Carrier10,136.3217074,0.394007216,2,2,4
 Yinchuan RDC,14,Carrier08,Carrier04,135.4925053,0.312144792,1,2,5
 Qingdao RDC,43,Carrier12,Carrier08,138.4687876,0.278124388,2,2,5
 Changsha RDC,50,Carrier08,Carrier10,137.4205706,0.261227113,2,2,5
-,,,,,,,,
