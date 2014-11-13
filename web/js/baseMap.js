@@ -5,7 +5,7 @@
  */
 
 var width = 650,
-    height = 600;
+    height = 550;
 
 var projection = d3.geo.albers()
     .center([0, 34.6])

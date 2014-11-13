@@ -72,7 +72,7 @@ function checkStatus()
             .x(d3.time.scale().domain(d3.extent(data, function (d) {
               return d.IndexDate;
             })));
-    dataTable.width(628).height(800)
+    dataTable.width(628).height(600)
             .dimension(timeDimension)
             .group(function (d) {
               return "<b><i>" + carrierType + "</i></b>";
