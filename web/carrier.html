@@ -55,22 +55,24 @@
             <div class="col-md-6">
                 <h4>Carrier</h4>
                 <script type="text/javascript" src="carrierView.js"></script>
+                <div class="dropdown">
                 <form name="carrierForm">
-                    <input type="radio" name="Carrier" id="Carrier_1" value="1">Carrier1
-                    <input type="radio" name="Carrier" value="2">Carrier2
-                    <input type="radio" name="Carrier" value="3">Carrier3
-                    <input type="radio" name="Carrier" value="4">Carrier4
-                    <input type="radio" name="Carrier" value="5">Carrier5
-                    <input type="radio" name="Carrier" value="6">Carrier6
-                    <br>
-                    <input type="radio" name="Carrier" value="7">Carrier7
-                    <input type="radio" name="Carrier" value="8">Carrier8
-                    <input type="radio" name="Carrier" value="9">Carrier9
-                    <input type="radio" name="Carrier" value="10">Carrier10
-                    <input type="radio" name="Carrier" value="11">Carrier11
-                    <input type="radio" name="Carrier" value="12">Carrier12
-                    <input type="button" value="Confirm" onclick="checkStatus()">
+                    <select id="carrierId" name="carrierId" onchange="checkStatus()">
+                        <option value="1">Carrier1</option>
+                        <option value="2">Carrier2</option>
+                        <option value="3">Carrier3</option>
+                        <option value="4">Carrier4</option>
+                        <option value="5">Carrier5</option>
+                        <option value="6">Carrier6</option>
+                        <option value="7">Carrier7</option>
+                        <option value="8">Carrier8</option>
+                        <option value="9">Carrier9</option>
+                        <option value="10">Carrier10</option>
+                        <option value="11">Carrier11</option>
+                        <option value="12">Carrier12</option>
+                    </select>
                 </form>
+                </div>
                 <div id='dc-c1-chart' >
                 </div>
                 <div>

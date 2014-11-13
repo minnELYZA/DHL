@@ -1,7 +1,8 @@
 function checkStatus()
 {
-    for (count = 0; count < 12; count++)
-    {
+    //for (count = 0; count < 12; count++)
+    //{
+    console.log(document.getElementById("carrierId").selected);
         if (carrierForm.Carrier[count].checked) {
             var dataTable = dc.dataTable("#dc-table-graph");
             var c1Chart = dc.barChart("#dc-c1-chart");
@@ -149,5 +150,5 @@ function checkStatus()
                 dc.renderAll();
             });
         }
-    }
+ //   }
 }
