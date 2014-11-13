@@ -18,6 +18,9 @@ function getName(x)
       d.Density = Math.round(+d.Density);
       d.CO2 = Math.round(+d.CO2);
       d.GCD = Math.round(+d.GCD);
+      d.RDCTrafficRating = +d.RDCTrafficRating;
+      d.RDCDensityRating = +d.RDCDensityRating;
+      d.RDCEfficiencyRating = +d.RDCEfficiencyRating;
     });
     // Run the data through crossfilter and load our 'facts'
     var facts = crossfilter(data);
@@ -133,6 +136,15 @@ function getName(x)
               },
               function (d) {
                 return d.CO2Metric;
+              },
+              function (d) {
+                return d.RDCTrafficRating;
+              },
+              function (d) {
+                return d.RDCDensityRating;
+              },
+              function (d) {
+                return d.RDCEfficiencyRating;
               }
             ])
             .sortBy(function (d) {
