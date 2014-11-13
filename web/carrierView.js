@@ -106,7 +106,7 @@ function checkStatus()
                 var timeDimension = facts.dimension(function (d) {
                     return d.Density;
                 });
-                c1Chart.width(550)
+                c1Chart.width(628)
                         .height(150)
                         .margins({top: 10, right: 10, bottom: 20, left: 40})
                         .dimension(deliveryByMonth)
@@ -116,7 +116,7 @@ function checkStatus()
                         .x(d3.time.scale().domain(d3.extent(data, function (d) {
                             return d.IndexDate;
                         })));
-                dataTable.width(960).height(800)
+                dataTable.width(628).height(800)
                         .dimension(timeDimension)
                         .group(function (d) {
                             return "<b><i>"+carrierType+"</i></b>";
@@ -140,12 +140,6 @@ function checkStatus()
                             },
                             function (d) {
                                 return d.EnglishDestination;
-                            },
-                            function (d) {
-                                return d.CO2Metric;
-                            },
-                            function (d) {
-                                return d.CarrierRef;
                             }
                         ])
                         .sortBy(function (d) {

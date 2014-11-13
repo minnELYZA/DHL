@@ -42,7 +42,7 @@
         <nav class="navbar navbar-default navbar-fixed-top nav-condensed" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">DHL Network</a>
+                    <a class="navbar-brand" href="DHL.html">DHL Network</a>
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
@@ -59,15 +59,15 @@
             </div>
 
             <div id="charts" class="col-md-6 hidden">
-                <button class="btn btn-primary" onclick="javascript:dc.filterAll();dc.renderAll();" style="float:right">Reset All</button>
                 <div id='dc-RDC-chart'>
-                    <h4>Average Density</h4>
+                    <h4>Total Deliveries<button class="btn btn-primary" onclick="javascript:dc.filterAll();dc.renderAll();" style="float:right">Reset All</button>
+                    </h4>
                 </div>
                 <div id='dc-DE-chart'>
-                    <h4>Density Rating Count</h4>
+                    <h4>Density Count</h4>
                 </div>
                 <div id='dc-CO2-chart'>
-                    <h4>CO2 Rating Count</h4>
+                    <h4>CO2 Count</h4>
                 </div>
             </div>
         </div>
