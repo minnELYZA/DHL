@@ -109,9 +109,9 @@ function getName(x)
         dataTable.width(1288).height(800)
                 .dimension(timeDimension)
                 .group(function (d) {
-                    return "<b><i>RDC Table</i></b>";
+                    return "<b><i>DC Table</i></b>";
                 })
-                .size(1000)
+                .size(10)
                 .columns([
                     function (d) {
                         return d.Density;

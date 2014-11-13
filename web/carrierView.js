@@ -2,7 +2,7 @@ function checkStatus()
 {
     //for (count = 0; count < 12; count++)
     //{
-    console.log(document.getElementById("carrierId").selected);
+    console.log(document.getElementById("carrierId"));
         if (carrierForm.Carrier[count].checked) {
             var dataTable = dc.dataTable("#dc-table-graph");
             var c1Chart = dc.barChart("#dc-c1-chart");
@@ -122,7 +122,7 @@ function checkStatus()
                         .group(function (d) {
                             return "<b><i>"+carrierType+"</i></b>";
                         })
-                        .size(1000)
+                        .size(10)
                         .columns([
                             function (d) {
                                 return d.Density;
