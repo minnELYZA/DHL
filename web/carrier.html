@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang='en'>
-    <head>
-        <meta charset='utf-8'>
-        <title>DHL Network</title>
+  <head>
+    <meta charset='utf-8'>
+    <title>DHL Network</title>
 
-        <link rel="stylesheet" href="css/dc.css">
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/map.css">
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/crossfilter.js" ></script>
-        <script type="text/javascript" src="js/d3.js"></script>
-        <script type="text/javascript" src="js/dc.js"></script>
-        <script type="text/javascript" src="js/topojson.js"></script>
-        <script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="css/dc.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/map.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/crossfilter.js" ></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/dc.js"></script>
+    <script type="text/javascript" src="js/topojson.js"></script>
+    <script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
 
-        <style>
-            h4 span {
-                font-size:14px;
-                font-weight:normal;
-            }
-            body {
-                padding-top: 50px;
-                /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-            }
-        </style>
-    </head>
+    <style>
+      body {
+        padding-top: 50px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+      }
+    </style>
+  </head>
 
-    <body>
+  <body>
 
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top nav-condensed" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="DHL.html">DHL Network</a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="carrier.html">Carrier<span class="sr-only">(current)</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <div id="map" class="col-md-6">
-                <script type="text/javascript" src="js/baseMap.js"></script>
-                <script type="text/javascript" src="js/routes.js"></script>
-            </div>
-            <div class="col-md-6">
-                <h4>Carrier</h4>
-                <script type="text/javascript" src="carrierView.js"></script>
-                <form name="carrierForm">
-                    <select id="carrierId" name="carrierId" onchange="checkStatus()">
-                        <option selected="selected">--Select one--</option>
-                        <option value="1">Carrier 1</option>
-                        <option value="2">Carrier 2</option>
-                        <option value="3">Carrier 3</option>
-                        <option value="4">Carrier 4</option>
-                        <option value="5">Carrier 5</option>
-                        <option value="6">Carrier 6</option>
-                        <option value="7">Carrier 7</option>
-                        <option value="8">Carrier 8</option>
-                        <option value="9">Carrier 9</option>
-                        <option value="10">Carrier 10</option>
-                        <option value="11">Carrier 11</option>
-                        <option value="12">Carrier 12</option>
-                    </select>
-                </form>
-                <div id='dc-c1-chart' >
-                </div>
-                <div>
-                    <table class='table table-hover table-bordered table-striped table-condensed' id='dc-table-graph' style="overflow:auto;width: 628px;overflow:auto;width: 628px;">
-                        <thead>
-                            <tr class='header'>
-                                <th style="width: 90px;">Density</th>
-                                <th style="width: 70px;">GCD</th>
-                                <th style="width: 70px;">CO2</th>
-                                <th style="width: 105px;">Date</th>
-                                <th style="width: 130px;">Origin</th>
-                                <th style="width: 130px;">Destination</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top nav-condensed" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="DHL.html">DHL Network</a>
         </div>
-    </body>
+        <div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="carrier.html">Carrier<span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div id="map" class="col-md-6">
+        <script type="text/javascript" src="js/baseMap.js"></script>
+        <script type="text/javascript" src="js/routes.js"></script>
+      </div>
+      <div class="col-md-6">
+        <script type="text/javascript" src="carrierView.js"></script>
+        <div class="col-md-2">
+          <h4 style="margin-top:5px;margin-bottom:5px;">Carrier</h4>
+        </div>
+        <div class="col-md-4" style="margin-top:5px;margin-bottom:5px;">
+          <form name="carrierForm">
+            <select id="carrierId" name="carrierId" onchange="checkStatus()">
+              <option selected="selected">--Select one--</option>
+              <option value="1">Carrier 1</option>
+              <option value="2">Carrier 2</option>
+              <option value="3">Carrier 3</option>
+              <option value="4">Carrier 4</option>
+              <option value="5">Carrier 5</option>
+              <option value="6">Carrier 6</option>
+              <option value="7">Carrier 7</option>
+              <option value="8">Carrier 8</option>
+              <option value="9">Carrier 9</option>
+              <option value="10">Carrier 10</option>
+              <option value="11">Carrier 11</option>
+              <option value="12">Carrier 12</option>
+            </select>
+          </form>
+        </div>
+        <div id='dc-c1-chart' >
+        </div>
+        <div>
+          <table class='table table-hover table-bordered table-striped table-condensed' id='dc-table-graph' style="overflow:auto;width: 628px;overflow:auto;width: 628px;">
+            <thead>
+              <tr class='header'>
+                <th style="width: 90px;">Density</th>
+                <th style="width: 70px;">GCD</th>
+                <th style="width: 70px;">CO2</th>
+                <th style="width: 105px;">Date</th>
+                <th style="width: 130px;">Origin</th>
+                <th style="width: 130px;">Destination</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
