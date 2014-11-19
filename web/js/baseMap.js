@@ -26,9 +26,16 @@ var zoom = d3.behavior.zoom()
     
 var svg = d3.select("#map").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .call(zoom);
 
-var features = svg.append("g");
+var g = svg.append("g");
+
+var base = g.append("g")
+    .attr("id", "base");
+
+var features = g.append("g")
+    .attr("id", "features");
 
 /* svg.append("rect")
     .attr("class", "overlay")
@@ -37,7 +44,7 @@ var features = svg.append("g");
     .call(zoom); */
 
 d3.json("/Dashboard/china.json", function(china) {
-  features.selectAll(".subunit")
+  base.selectAll(".subunit")
     .data(topojson.feature(china, china.objects.subunits).features)
     .enter().append("path")
     .attr("class", function(d) { return "subunit " + d.id; })
@@ -58,7 +65,7 @@ d3.json("/Dashboard/china.json", function(china) {
 //    .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
 //    .text(function(d) { return d.properties.name; });
     
-  features.selectAll(".subunit-label")
+  base.selectAll(".subunit-label")
     .data(topojson.feature(china, china.objects.subunits).features)
     .enter().append("text")
     .attr("class", function(d) {return "subunit-label " + d.id;})
@@ -69,9 +76,27 @@ d3.json("/Dashboard/china.json", function(china) {
 });
 
 function zoomed() {
-  features.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  features.select(".subunit").style("stroke-width", 1.5 / d3.event.scale + "px");
-  features.select(".subunit-label").style("stroke-width", 1.5 / d3.event.scale + "px");
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  //base.select(".subunit").style("stroke-width", 1.5 / d3.event.scale + "px");
+  //base.select(".subunit-label").style("stroke-width", 1.5 / d3.event.scale + "px");
+  //features.select(".graticule").style("stroke-width", 0.5 + "px");
+  d3.selectAll("circle")
+      .attr("r", 4.5/d3.event.scale)
+      .attr("style", "stroke-width:" + 2/d3.event.scale + "px;");
+  d3.selectAll("rect")
+      .attr("x", -5/d3.event.scale)
+      .attr("y", -5/d3.event.scale)
+      .attr("height", 10/d3.event.scale)
+      .attr("width", 10/d3.event.scale)
+      .attr("style", "stroke-width:" + 2/d3.event.scale + "px;");
+  d3.selectAll(".rdc").selectAll("text")
+      .attr("y", -15/d3.event.scale)
+      .attr("style", "font-size:" + 10/d3.event.scale + ";");
+  d3.selectAll(".cdc").selectAll("text")
+      .attr("y", 15/d3.event.scale)
+      .attr("style", "font-size:" + 13/d3.event.scale + ";");
+  d3.selectAll(".route").selectAll("path")
+      .attr("style", "stroke-width:" + 1/d3.event.scale + "px;");
 }
 
 d3.select(self.frameElement).style("height", height + "px");

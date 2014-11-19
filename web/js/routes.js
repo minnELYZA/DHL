@@ -6,13 +6,15 @@
 
 var graticule = d3.geo.graticule();
   
-var svg = d3.select("svg").select("g");
+var svg = d3.select("svg").select("#features");
 
 var cdc = {};
 var rdc = {};
 var test;
+var rects;
 var circles;
 var lines;
+var rectSelected = false;
 var circleSelected = false;
 
 d3.csv("./data/Addresses.csv", function(error, addresses) {
@@ -41,12 +43,15 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     .enter().append("g")
     .attr("transform", function(d) { return "translate(" + projection(d.value) + ")"; });
 
-  ptCdc.append("circle")
+  ptCdc.append("rect")
     .attr("name", function(d) {return d.key;})
-    .attr("r", 10);
+    .attr("x", -5)
+    .attr("y", -5)
+    .attr("height", 10)
+    .attr("width", 10);
 
   ptCdc.append("text")
-    .attr("y", -25)
+    .attr("y", 15)
     .attr("dy", ".71em")
     .text(function(d) { return d.key; });
 
@@ -62,15 +67,20 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
     .attr("r", 4.5);
 
   ptRdc.append("text")
-    .attr("y", 10)
+    .attr("y", -15)
     .attr("dy", ".71em")
     .text(function(d) { return d.key; });
   
-  // select circles
-  circles = svg.selectAll("circle")
+  // select rects
+  rects = svg.selectAll("rect")
           .on("click", function(d){
-            circleSelected = true;
+            circleSelected = false;
+            rectSelected = true;
             console.log(d);
+            // insert code here to clear prev selected nodes
+            rects[0].forEach(function(e){
+              e.style.fill = null;
+            });
             circles[0].forEach(function(e){
               e.style.fill = null;
             });
@@ -96,9 +106,52 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
             });
           })
           .on("mouseout", function(d){
-            if (!circleSelected) {
+            if (!rectSelected) {
               lines[0].forEach(function(e){
                 if (e.hasAttribute("from")) {
+                  e.style.stroke = null;
+                }
+              });
+            }
+          });
+  
+  // select circles
+  circles = svg.selectAll("circle")
+          .on("click", function(d){
+            rectSelected = false;
+            circleSelected = true;
+            console.log(d);
+            circles[0].forEach(function(e){
+              e.style.fill = null;
+            });
+            rects[0].forEach(function(e){
+              e.style.fill = null;
+            });
+            d3.select(this).style("fill", "yellow");
+            lines[0].forEach(function(e){
+              if (e.hasAttribute("to") && e.getAttribute("to") === d.key) {
+                e.style.stroke = "lightcoral";
+              } else if (e.hasAttribute("to")) {
+                e.style.stroke = "none";
+              }
+            });
+            getName(d.key);
+          })
+          .on("mouseover", function(d){
+            this.style.cursor = "pointer";
+            console.log(d.key);
+            lines[0].forEach(function(e){
+              if (e.hasAttribute("to") && e.getAttribute("to") === d.key) {
+                e.style.stroke = "lightcoral";
+              } else if (e.hasAttribute("to")) {
+                e.style.stroke = "none";
+              }
+            });
+          })
+          .on("mouseout", function(d){
+            if (!circleSelected) {
+              lines[0].forEach(function(e){
+                if (e.hasAttribute("to")) {
                   e.style.stroke = null;
                 }
               });
@@ -130,6 +183,7 @@ d3.csv("./data/Addresses.csv", function(error, addresses) {
 
     // select lines
     lines = svg.selectAll("path").on("click", function(d){
+      rectSelected = false;
       circleSelected = false;
       console.log(d);
       circles[0].forEach(function(e){

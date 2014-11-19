@@ -22,11 +22,11 @@ text {
     stroke-width: .5px;
     stroke-opacity: .5;
 }
-.points circle {
+.points circle, .points rect {
     fill: #fff;
     stroke-width: 2px;
 }
-.cdc circle {
+.cdc rect {
     stroke: green;
 }
 .rdc circle {
@@ -47,7 +47,7 @@ text {
 }
 .route {
     fill: none;
-    stroke: silver;
+    stroke: none /*silver*/;
     stroke-width: 1px;
 }
 .route:hover {
