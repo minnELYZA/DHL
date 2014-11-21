@@ -2,7 +2,7 @@ function checkStatus()
 {
     var e = document.getElementById("carrierId");
     var dataTable = dc.dataTable("#dc-table-graph");
-    var c1Chart = dc.barChart("#dc-c1-chart");
+    var c1Chart = dc.barChart("#carrier-bar-chart");
     // format our data
     var c = e.options[e.selectedIndex].value;
     var carrierType = "";
@@ -113,7 +113,7 @@ function seeMode(mode)
 {
     var e = document.getElementById("carrierId");
     var dataTable = dc.dataTable("#dc-table-graph");
-    var c1Chart = dc.barChart("#dc-c1-chart");
+    var c1Chart = dc.barChart("#carrier-bar-chart");
     // format our data
     var c = e.options[e.selectedIndex].value;
     var carrierType = "";
