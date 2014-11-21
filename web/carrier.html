@@ -19,6 +19,7 @@
     <script type="text/javascript" src="js/dc.js"></script>
     <script type="text/javascript" src="js/topojson.js"></script>
     <script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
+    <script src="RadarChart.js"></script>
 
     <style>
       body {
@@ -71,6 +72,13 @@
               <option value="12">Carrier 12</option>
             </select>
           </form>
+        </div>
+        <div class="col-md-4" style="margin-top:5px;margin-bottom:5px;">
+            <button onclick="seeModeAir()">Air</button>
+            <button onclick="seeModeRail()">Rail</button>
+            <button onclick="seeModeRoad()">Road</button>
+            <script type="text/javascript" src="radar.js"></script>
+            <div id="chart"></div>
         </div>
         <div id='dc-c1-chart' >
         </div>
