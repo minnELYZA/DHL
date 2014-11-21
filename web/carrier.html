@@ -51,12 +51,13 @@
             </div>
             <div class="col-md-6">
                 <script type="text/javascript" src="carrierView.js"></script>
+                <script type="text/javascript" src="radar.js"></script>
                 <div class="col-md-2">
                     <h4 style="margin-top:5px;margin-bottom:5px;">Carrier</h4>
                 </div>
                 <div class="col-md-4" style="margin-top:5px;margin-bottom:5px;">
                     <form name="carrierForm">
-                        <select id="carrierId" name="carrierId" onchange="checkStatus()">
+                        <select id="carrierId" name="carrierId" onchange="checkStatus();checkStatusRadar()">
                             <option selected="selected">--Select one--</option>
                             <option value="1">Carrier 1</option>
                             <option value="2">Carrier 2</option>
@@ -74,11 +75,10 @@
                     </form>
                 </div>
                 <div class="col-md-4" style="margin-top:5px;margin-bottom:5px;">
-                    <button onclick="seeModeAir()">Air</button>
-                    <button onclick="seeModeRail()">Rail</button>
-                    <button onclick="seeModeRoad()">Road</button>
-                    <script type="text/javascript" src="radar.js"></script>
-                    <div id="chart"></div>
+                    <button onclick="seeMode('AIR');seeModeRadar('AIR')">Air</button>
+                    <button onclick="seeMode('RAIL');seeModeRadar('RAIL')">Rail</button>
+                    <button onclick="seeMode('ROAD');seeModeRadar('ROAD')">Road</button>
+                    
                 </div>
                 <div id='dc-c1-chart' >
                 </div>
@@ -92,10 +92,12 @@
                                 <th style="width: 105px;">Date</th>
                                 <th style="width: 130px;">Origin</th>
                                 <th style="width: 130px;">Destination</th>
+                                <th style="width: 100px;">Mode</th>
                             </tr>
                         </thead>
                     </table>
                 </div>
+                <div id="chart"></div>
             </div>
         </div>
     </body>
