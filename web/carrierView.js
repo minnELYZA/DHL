@@ -77,7 +77,7 @@ function checkStatus()
                 .group(function (d) {
                     return "<b><i>" + carrierType + "</i></b>";
                 })
-                .size(10)
+                .size(50)
                 .columns([
                     function (d) {
                         return d.Density;
