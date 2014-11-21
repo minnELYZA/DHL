@@ -105,3 +105,18 @@ function checkStatus()
     dc.renderAll();
   });
 }
+
+function seeModeAir()
+{
+    
+}
+
+function seeModeRail()
+{
+    
+}
+
+function seeModeRoad()
+{
+    
+}
