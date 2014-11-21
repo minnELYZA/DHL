@@ -6,7 +6,7 @@ function checkStatus()
     // format our data
     var c = e.options[e.selectedIndex].value;
     var carrierType = "";
-    d3.csv("data/DataWithDates.csv", function (data) {
+    d3.csv("data/DataWithDates1.csv", function (data) {
         data = data.filter(function (row) {
             carrierType = "Carrier " + c;
             if (c === null) {
@@ -24,7 +24,6 @@ function checkStatus()
             d.CO2 = Math.round(+d.CO2);
             d.GCD = Math.round(+d.GCD);
             d.CO2Metric = +d.CO2Metric;
-            console.log(d.Mode);
         });
         // Run the data through crossfilter and load our 'facts'
         var facts = crossfilter(data);
@@ -118,16 +117,12 @@ function seeMode(mode)
     // format our data
     var c = e.options[e.selectedIndex].value;
     var carrierType = "";
-    d3.csv("data/DataWithDates.csv", function (data) {
+    d3.csv("data/DataWithDates1.csv", function (data) {
         data = data.filter(function (row) {
-            carrierType = "Carrier " + c;
-            Mode = mode;
-            if (c === null) {
-                return;
-            } else if (c < 10) {
-                return row['CarrierRef'] === ('Carrier0' + c);
+            if (c < 10) {
+                return row['CarrierRef'] === ('Carrier0' + c) && row['Mode'] === (mode);
             } else {
-                return row['CarrierRef'] === ('Carrier' + c);
+                return row['CarrierRef'] === ('Carrier' + c) && row['Mode'] === (mode);
             }
         });
         var dateFormat = d3.time.format("%m-%d-%Y").parse;
